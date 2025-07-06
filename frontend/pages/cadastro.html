@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-icons">
+        <a href="cadastro.html" class="icon-item active">
+            <img src="../icons/person_add.png" alt="Cadastro">
+            <span>Cadastro</span>
+        </a>
+        <a href="relatorio.html" class="icon-item">
+            <img src="../icons/patient_list.png" alt="Relatório">
+            <span>Relatório</span>
+        </a>
+    </div>
+</nav>
+
+<div class="form-container">
+    <h1>Cadastro de Usuário</h1>
+
+    <form id="formCadastro" action="../../backend/api/clientes.php" method="POST">
+        <div class="form-group">
+            <label for="nome">Nome completo:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" maxlength="14" required>
+            <small class="help-text">Digite apenas números</small>
+        </div>
+
+        <div class="form-group">
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" maxlength="9" required>
+            <small class="help-text">Digite o CEP para preenchimento automático</small>
+        </div>
+
+        <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required>
+        </div>
+
+        <div class="form-group">
+            <label for="numero">Número:</label>
+            <input type="text" id="numero" name="numero" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" name="cidade" required>
+        </div>
+
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado" maxlength="2" required>
+            <small class="help-text">Ex: MG, SP, RJ</small>
+        </div>
+
+        <button type="submit" class="btn-primary">Cadastrar</button>
+    </form>
+</div>
+
+<script src="../js/cadastro.js"></script>
+
+<script>
+    // Verificar mensagens de erro na URL
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error) {
+            let mensagem = '';
+            switch(error) {
+                case '1':
+                    mensagem = 'Erro ao cadastrar usuário. Tente novamente.';
+                    break;
+                case '2':
+                    mensagem = 'Todos os campos são obrigatórios.';
+                    break;
+                case '3':
+                    mensagem = 'CPF inválido. Verifique os dados.';
+                    break;
+                case '4':
+                    mensagem = 'Este CPF já está cadastrado no sistema.';
+                    break;
+                default:
+                    mensagem = 'Erro desconhecido.';
+            }
+
+            mostrarNotificacao(mensagem, 'error');
+
+            // Limpar URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const isEdit = params.get('edit') === 'true';
+
+        if (isEdit) {
+            const usuarioEditando = JSON.parse(localStorage.getItem('usuarioEditando'));
+
+            if (usuarioEditando) {
+                // Preencher o formulário
+                document.getElementById('nome').value = usuarioEditando.nome || '';
+                document.getElementById('cpf').value = usuarioEditando.cpf || '';
+                document.getElementById('cep').value = usuarioEditando.cep || '';
+                document.getElementById('endereco').value = usuarioEditando.endereco || '';
+                document.getElementById('numero').value = usuarioEditando.numero || '';
+                document.getElementById('bairro').value = usuarioEditando.bairro || '';
+                document.getElementById('cidade').value = usuarioEditando.cidade || '';
+                document.getElementById('estado').value = usuarioEditando.estado || '';
+
+                // Criar ou preencher o input hidden com idusuario dentro do formulário correto
+                let idField = document.getElementById('idusuario');
+                if (!idField) {
+                    idField = document.createElement('input');
+                    idField.type = 'hidden';
+                    idField.name = 'idusuario';
+                    idField.id = 'idusuario';
+                    document.getElementById('formularioCadastro').appendChild(idField);
+                }
+                idField.value = usuarioEditando.id || usuarioEditando.idusuario;
+
+                // Atualizar botão e título
+                const btn = document.getElementById('btnSalvar');
+                if (btn) btn.textContent = 'Atualizar Usuário';
+
+                const titulo = document.querySelector('h1');
+                if (titulo) titulo.textContent = 'Editar Usuário';
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Usuários</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/relatorio.css">
+</head>
+<body>
+
+<!-- NOTIFICAÇÃO -->
+<div id="notification" class="notification"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-icons">
+        <a href="cadastro.html" class="icon-item">
+            <img src="../icons/person_add.png" alt="Cadastro">
+            <span>Cadastro</span>
+        </a>
+        <a href="relatorio.html" class="icon-item">
+            <img src="../icons/patient_list.png" alt="Relatório">
+            <span>Relatório</span>
+        </a>
+    </div>
+</nav>
+
+<!-- FILTROS -->
+<div class="filters">
+    <input type="text" placeholder="Filtrar por nome" id="filtroNome">
+    <input type="text" placeholder="Filtrar por CPF" id="filtroCPF">
+    <input type="text" placeholder="Filtrar por CEP" id="filtroCEP">
+    <input type="text" placeholder="Filtrar por cidade" id="filtroCidade">
+    <input type="text" placeholder="Filtrar por estado" id="filtroEstado">
+    <button id="limparFiltros">Limpar Filtros</button>
+    <button id="filtrarMesmoCEP">Mostrar apenas usuários com mesmo CEP</button>
+</div>
+
+<!-- CONTROLES -->
+<div class="controls">
+    <button id="recarregarDados">Recarregar Dados</button>
+    <span id="totalUsuarios">Total: 0 usuários</span>
+</div>
+
+<!-- TABELA -->
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>CEP</th>
+            <th>Endereço</th>
+            <th>Número</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Usuários mesmo CEP</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody id="tabelaUsuarios">
+        <!-- Os dados serão inseridos dinamicamente via JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="loading" style="display: none;">
+    <p>Carregando dados...</p>
+</div>
+
+<!-- MODAL DE CONFIRMAÇÃO -->
+<div id="modalConfirmacao" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Confirmar Exclusão</h3>
+        <p>Tem certeza que deseja excluir este usuário?</p>
+        <div class="modal-actions">
+            <button id="confirmarExclusao" class="btn-danger">Excluir</button>
+            <button id="cancelarExclusao" class="btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script src="../js/relatorio.js"></script>
+
+</body>
+</html>
