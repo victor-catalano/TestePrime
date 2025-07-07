@@ -23,7 +23,7 @@
         </a>
     </div>
 </nav>
-
+<div id="notification" class="notification"></div>
 <div class="form-container">
     <h1>Cadastro de Usuário</h1>
 
@@ -102,7 +102,7 @@
                     mensagem = 'Erro desconhecido.';
             }
 
-            mostrarNotificacao(mensagem, 'error');
+            showNotification(mensagem, 'error');
 
             // Limpar URL
             window.history.replaceState({}, document.title, window.location.pathname);
@@ -128,7 +128,6 @@
                 document.getElementById('cidade').value = usuarioEditando.cidade || '';
                 document.getElementById('estado').value = usuarioEditando.estado || '';
 
-                // Criar ou preencher o input hidden com idusuario dentro do formulário correto
                 let idField = document.getElementById('idusuario');
                 if (!idField) {
                     idField = document.createElement('input');

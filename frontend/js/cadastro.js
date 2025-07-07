@@ -245,11 +245,11 @@ function showNotification(message, type) {
     const notification = document.getElementById('notification');
     if (notification) {
         notification.textContent = message;
-        notification.className = `notification ${type}`;
-        notification.style.display = 'block';
+        notification.className = `notification ${type} show`; // Adiciona a classe 'show'
 
+        // Remove a notificação após 5 segundos
         setTimeout(() => {
-            notification.style.display = 'none';
+            notification.classList.remove('show');
         }, 5000);
     }
 }
