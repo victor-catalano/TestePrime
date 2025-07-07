@@ -90,6 +90,8 @@ if (!$conexao) {
 ![image](https://github.com/user-attachments/assets/d82f04f9-c785-4a6d-b5e5-ce8ce23768c7)
 ### Filtro por estado
 ![image](https://github.com/user-attachments/assets/1c79c4f0-0917-45a2-90d2-a192b1348b20)
+### Busca de CEP automático
+![buscaCep](https://github.com/user-attachments/assets/e40f8cb4-7c12-4e0a-b39c-b9287b4a5de8)
 
 ## Comandos SQL para criar estrutura do Banco de Dados
 ### Tabela usuario
