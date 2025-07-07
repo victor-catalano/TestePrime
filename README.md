@@ -16,10 +16,10 @@ Sistema web para cadastro, edição, listagem e exclusão de usuários com integ
 
 - Cadastro de usuários com validação de CPF e CEP
 - Edição de usuários existentes
+- Exclusão de usuários com confirmação
 - Máscaras para CPF e CEP no formulário
 - Busca automática de endereço via CEP
 - Notificações de sucesso/erro
-- Exclusão de usuários com confirmação
 - Tela de relatório com listagem e filtro
 
 ---
